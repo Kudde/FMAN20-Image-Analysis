@@ -13,3 +13,5 @@ image
 image_quant = round(image.*15)
 image_gray = mat2gray(image_quant)
 imshow(flipud(image_gray),'InitialMagnification','fit')
+
+arrayfun(round(), flipud(image) * 15)

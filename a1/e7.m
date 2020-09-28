@@ -20,7 +20,14 @@ x4 = scalar(o4, f)
 
 fa = x1.*o1 + x2.*o2 + x3.*o3 + x4.*o4
 
+fdiff  = f - fa
+error  = scalar((f - fa),(f - fa))
+normF  = norm(f)
+normFa = norm(fa)
+
+
 function s = scalar(a, b)
     ab = a.*b;
     s = sum(sum(ab));
 end
+
