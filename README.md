@@ -11,6 +11,12 @@
 - Image bases -> e8.m
 
 ## Assignment 2
+- Filtering   -> e1.m
+- Interpolation -> e2.m
+- Classification using Nearest Neighbour and Bayes theorem -> e3.m
+- Classification e4-6.m
+- The OCR system - part 2 - Feature extraction -> ocr_project
+
 
 ## Assignment 3
 
