@@ -1,0 +1,5 @@
+function y = classify(x, classification_data)
+% IMPLEMENT YOUR CHOSEN MACHINE LEARNING CLASSIFIER HERE
+y = 0; % REMOVE AND REPLACE WITH YOUR CODE
+end
+
