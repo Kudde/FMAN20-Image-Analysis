@@ -15,6 +15,12 @@ clearvars;
 load FaceNonFace
 nbr_examples = length(Y);
 
+k = 3;
+test_errors = zeros(k,1);
+train_errors = zeros(k,1);
+ki = k;
+%for ki = 1 : k
+    
 % This outer loop will run 100 times, so that you get a mean error for your
 % classifier (the error will become different each time due to the
 % randomness of cvpartition, which you may verify if you wish).
@@ -28,9 +34,9 @@ for i = 1 : nbr_trials
     
     % Extract training and test data given the partition above
     X_train = X(:, part.training);
-    %X_test = FILL IN
-    %Y_train = FILL IN
-    %Y_test = FILL IN
+    X_test  = X(:, part.test);
+    Y_train = Y(:, part.training);
+    Y_test  = Y(:, part.test);
     nbr_train_examples = length(Y_train);
     nbr_test_examples = length(Y_test);
     
@@ -41,16 +47,17 @@ for i = 1 : nbr_trials
     % Next, let's use our trained model to classify the examples in the 
     % test data
     predictions_test = zeros(1, nbr_test_examples);
-    for j = 1 : nbr_test_examples
-        % YOU SHOULD IMPLEMENT THE FUNCTION classify!
-        predictions_test(j) = classify(X_test(:, j), classification_data);
+    for j = 1 : nbr_test_examples  
+        % predictions_test(j) = classify(X_test(:, j), classification_data);
+        predictions_test(j) = knn(X_test(:, j), classification_data, Y_train, ki);
+
     end
    
     % We do the same thing again but this time for the training data itself!
     predictions_train = zeros(1, nbr_train_examples);
     for j = 1 : nbr_train_examples
-        % YOU SHOULD IMPLEMENT THE FUNCTION classify!
-        predictions_train(j) = classify(X_train(:, j), classification_data);
+        % predictions_train(j) = classify(X_test(:, j), classification_data);
+        predictions_train(j) = knn(X_train(:, j), classification_data, Y_train, ki);
     end
     
     % We can now proceed to computing the respective error rates.
@@ -74,29 +81,30 @@ for i = 1 : nbr_trials
     % RESULTS
     
     % Train built-in functions (don't forget: transpose as necessary)
-    tree_model % = FILL IN
-    svm_model % = FILL IN
-    nn_model % = FILL IN 
+    %tree_model = fitctree(X_train',Y_train');
+    %svm_model  = fitcsvm(X_train',Y_train');
+    %nn_model   = fitcknn(X_train',Y_train');
+   
     
     % Next, let's use our trained model to classify the examples in the 
     % test data. You should look up the function "predict" in Matlab!
     % (don't forget: transpose as necessary, both for X and Y)
-    predictions_test_tree % = FILL IN
-    predictions_test_svm % = FILL IN
-    predictions_test_nn % = FILL IN
+    %predictions_test_tree % = FILL IN
+    %predictions_test_svm % = FILL IN
+    %predictions_test_nn % = FILL IN
    
     % We can now proceed to computing the respective error rates.
-    pred_test_diff_tree = predictions_test_tree - Y_test;
-    pred_test_diff_svm % = FILL IN
-    pred_test_diff_nn % = FILL IN
-    err_rate_test_tree % = FILL IN
-    err_rate_test_svm % = FILL IN
-    err_rate_test_nn % = FILL IN
+    %pred_test_diff_tree = predictions_test_tree - Y_test;
+    %pred_test_diff_svm % = FILL IN
+    %pred_test_diff_nn % = FILL IN
+    %err_rate_test_tree % = FILL IN
+    %err_rate_test_svm % = FILL IN
+    %err_rate_test_nn % = FILL IN
     
     % Store them in the containers
-    err_rates_test(i, 2) = err_rate_test_tree;
-    err_rates_test(i, 3) = err_rate_test_svm;
-    err_rates_test(i, 4) = err_rate_test_nn;
+    %err_rates_test(i, 2) = err_rate_test_tree;
+    %err_rates_test(i, 3) = err_rate_test_svm;
+    %err_rates_test(i, 4) = err_rate_test_nn;
     
     % Let's do the same for the training data
     % FILL IN CODE SIMILAR TO THE TEST PART ABOVE!
@@ -107,11 +115,17 @@ end
 % NOTE: From here you get two 4-dimensional arrays, where the first entry
 % is the mean error rate for your own method, and the last three
 % entries are mean error rates for the built-in methods
-%
-% DO NOT FORGET: COMMENT ON ALL RESULTS IN THE REPORT
-%
+
 mean_err_rate_test = mean(err_rates_test, 1)
 mean_err_rate_train = mean(err_rates_train, 1)
+
+% code to find the best K
+% ki
+% test_errors(ki) = mean_err_rate_test(1);
+% train_errors(ki) = mean_err_rate_train(1);
+% end
+% figure()
+% plot((1:k),test_errors,(1:k),train_errors)
 
 % ------------------ FOR TASK 2 BELOW! ---------------------------------
 
@@ -125,3 +139,10 @@ mean_err_rate_train = mean(err_rates_train, 1)
 % that the face is a face, and that the non-face is a non-face, but it's
 % not certain of course. Make sure that the two images are extracted from
 % X_test, and not X_train. Write code for this below! 
+
+%figure()
+%image = reshape(X_test(:, 1), 19, 19);
+%imagesc(image);
+%y_pred = knn(X_test(:, 1), classification_data, Y_train, k)
+% y_true = Y_test(1)
+
