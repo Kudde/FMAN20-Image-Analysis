@@ -81,33 +81,49 @@ for i = 1 : nbr_trials
     % RESULTS
     
     % Train built-in functions (don't forget: transpose as necessary)
-    %tree_model = fitctree(X_train',Y_train');
-    %svm_model  = fitcsvm(X_train',Y_train');
-    %nn_model   = fitcknn(X_train',Y_train');
-   
+    tree_model = fitctree(X_train',Y_train'); % Regression tree classifier
+    svm_model  = fitcsvm(X_train',Y_train');  % Support Vector Machine
+    nn_model   = fitcknn(X_train',Y_train');  % Nearest Neighbour Classifier
+ 
     
     % Next, let's use our trained model to classify the examples in the 
     % test data. You should look up the function "predict" in Matlab!
     % (don't forget: transpose as necessary, both for X and Y)
-    %predictions_test_tree % = FILL IN
-    %predictions_test_svm % = FILL IN
-    %predictions_test_nn % = FILL IN
+    predictions_test_tree = predict(tree_model, X_test');
+    predictions_test_svm  = predict(svm_model, X_test');
+    predictions_test_nn   = predict(nn_model, X_test');
    
     % We can now proceed to computing the respective error rates.
-    %pred_test_diff_tree = predictions_test_tree - Y_test;
-    %pred_test_diff_svm % = FILL IN
-    %pred_test_diff_nn % = FILL IN
-    %err_rate_test_tree % = FILL IN
-    %err_rate_test_svm % = FILL IN
-    %err_rate_test_nn % = FILL IN
+    pred_test_diff_tree = predictions_test_tree - Y_test';
+    pred_test_diff_svm  = predictions_test_svm - Y_test';
+    pred_test_diff_nn   = predictions_test_nn - Y_test';
+    
+    err_rate_test_tree = nnz(pred_test_diff_tree) / nbr_test_examples;
+    err_rate_test_svm  = nnz(pred_test_diff_svm) / nbr_test_examples;
+    err_rate_test_nn   = nnz(pred_test_diff_nn) / nbr_test_examples;
     
     % Store them in the containers
-    %err_rates_test(i, 2) = err_rate_test_tree;
-    %err_rates_test(i, 3) = err_rate_test_svm;
-    %err_rates_test(i, 4) = err_rate_test_nn;
+    err_rates_test(i, 2) = err_rate_test_tree;
+    err_rates_test(i, 3) = err_rate_test_svm;
+    err_rates_test(i, 4) = err_rate_test_nn;
     
     % Let's do the same for the training data
-    % FILL IN CODE SIMILAR TO THE TEST PART ABOVE!
+    
+    predictions_train_tree = predict(tree_model, X_train');
+    predictions_train_svm  = predict(svm_model, X_train');
+    predictions_train_nn   = predict(nn_model, X_train');
+   
+    pred_train_diff_tree = predictions_train_tree - Y_train';
+    pred_train_diff_svm  = predictions_train_svm - Y_train';
+    pred_train_diff_nn   = predictions_train_nn - Y_train';
+    
+    err_rate_train_tree = nnz(pred_train_diff_tree) / nbr_train_examples;
+    err_rate_train_svm  = nnz(pred_train_diff_svm) / nbr_train_examples;
+    err_rate_train_nn   = nnz(pred_train_diff_nn) / nbr_train_examples;
+    
+    err_rates_train(i, 2) = err_rate_train_tree;
+    err_rates_train(i, 3) = err_rate_train_svm;
+    err_rates_train(i, 4) = err_rate_train_nn;
 end
 
 % Finally, after all the trials are done, report mean error rates
@@ -119,7 +135,8 @@ end
 mean_err_rate_test = mean(err_rates_test, 1)
 mean_err_rate_train = mean(err_rates_train, 1)
 
-% code to find the best K
+% code to look at different k values
+
 % ki
 % test_errors(ki) = mean_err_rate_test(1);
 % train_errors(ki) = mean_err_rate_train(1);
