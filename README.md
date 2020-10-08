@@ -19,5 +19,9 @@
 
 
 ## Assignment 3
+- Line fitting LS / TLS -> task1
+- Building a classifier (KNN) -> task2_and_3
+- Pre-coded ML-techniques -> task2_and_3
+- OCR system construction and system testing -> task4
 
 ## Assignment 4
