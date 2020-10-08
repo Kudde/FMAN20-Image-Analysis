@@ -11,7 +11,6 @@ K = 1;
 X = classification_data{1};
 Y = classification_data{2};
 
-pred = knn(x, X, Y, K);
-y = mode(pred);
+y = knn(x, X, Y, K);
 
 end
