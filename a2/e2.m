@@ -18,10 +18,10 @@ plot(x,f,'o',xi,y)
 % figure(1)
 % plot(x,c,'o',xi,y)
 
-f2 = []
+f2 = [];
 for i = 0:0.1:7
-    y = interpolate2(f, i)
-    f2 = [f2 y]
+    y = interpolate(f, i);
+    f2 = [f2 y];
 end
 
 x2 = 0:0.1:7;
@@ -31,19 +31,7 @@ plot(x2,f2,'o',x2i, y)
 
 function y = interpolate(f, x)
     y = 0;
-    [m, n] = size(f);
-    
-    for i = 1:n
-        y = y + g(x-i) * f(i);
-
-    end
-
-
-end
-
-function y = interpolate2(f, x)
-    y = 0;
-    [m, n] = size(f);
+    [~, n] = size(f);
     
     for i = 1:n
         y = y + g2(x-i) * f(i);
@@ -53,7 +41,7 @@ function y = interpolate2(f, x)
 
 end
 
-function y = g(x)
+function y = lin(x)
     y = 0;
     if abs(x) < 1
         y = 1 - abs(x);
@@ -66,7 +54,7 @@ function y = g2(x)
         y = abs(x)^3 - 2 * abs(x)^2 + 1;
         
     elseif 1 < abs(x) && abs(x) <= 2
-        y = -abs(x)^3 - 5 * abs(x)^2 - 8 * abs(x) + 4;
+        y = -abs(x)^3 + 5 * abs(x)^2 - 8 * abs(x) + 4;
         
     else
         y = 0;

@@ -36,7 +36,7 @@ epsW = 0.35; % probability of white being black
 epsB = 0.25; % probability of black being white 
 
 pCW  = 1-epsW; % probability of white being white
-pCB  = 1-epsB; % probability of white being white
+pCB  = 1-epsB; % probability of black being black
 
  
 % posterior = 
@@ -48,14 +48,15 @@ pCB  = 1-epsB; % probability of white being white
 % / Pn
 
 PB = pB * (pCB^5) * (pCW^5) * (epsB^5) * (epsW^0);
-PO = pO * (pCB^3) * (pCW^5) * (epsB^2) * (epsW^5);
-PE = pE * (pCB^4) * (pCW^7) * (epsB^1) * (epsW^3);
+PO = pO * (pCB^3) * (pCW^5) * (epsB^5) * (epsW^2);
+PE = pE * (pCB^4) * (pCW^7) * (epsB^3) * (epsW^1);
 
 Pn = PB + PO + PE;
 
 PBpost = PB/Pn
 POpost = PO/Pn
 PEpost = PE/Pn
+
 
 
 
