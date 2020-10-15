@@ -54,22 +54,26 @@ set(h, 'Position', rect)
 % WRITE CODE BELOW TO COMPUTE THE 4 ERRORS
 
 disp('Least Square Fit')
-[ls_e, tls_e] = error(x, y, p_ls)
+[ls_error, tls_error] = error(x, y, p_ls)
 
 disp('Total Least Square Fit')
-[ls_e, tls_e] = error(x, y, p_tls)
+[ls_error, tls_error] = error(x, y, p_tls)
 
 
-function [ls_e, tls_e] = error(x,y, p)
+function [ls_error, tls_error] = error(x, y, p)
 % returns [Least Square error, Total Least Square error]
 k = p(1);
 m = p(2);
+n = size(x,2);
 
-ls_e  = sum( y - (k*x + m));
-tls_e = sum( abs(k*x-y+m)) / (sqrt(1+k^2) );
+ls_error = 0;
+tls_error = 0;
 
+for i = 1:n
+    ls_error  = ls_error  + (y(i) - (k*x(i) + m))^2;
+    tls_error = tls_error + ((abs(k*x(i) - y(i)+m)) / (sqrt(k^2+1)))^2;
 end
-
+end
 
 function p = ls(x, y)
 % Least Squares
