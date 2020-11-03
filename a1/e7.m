@@ -24,6 +24,7 @@ fdiff  = f - fa
 error  = scalar((f - fa),(f - fa))
 normF  = norm(f)
 normFa = norm(fa)
+normFdiff = norm(fdiff)
 
 
 function s = scalar(a, b)

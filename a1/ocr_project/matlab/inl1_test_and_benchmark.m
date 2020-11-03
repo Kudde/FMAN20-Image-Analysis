@@ -27,7 +27,7 @@ datadir = '../datasets/short1';     % Which folder of examples are you going to 
 
 %% Benchmark and visualize
 mode = 2; % debug mode with the most plots
-[alljs,alljfg]=benchmark_inl1(mysystem,datadir,2);
+[alljs,alljfg]=benchmark_inl1(mysystem,datadir,mode);
 
 %%
 

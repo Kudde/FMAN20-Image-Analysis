@@ -29,5 +29,12 @@ b2 = [ 1;  3];
 b3 = [ 5;  2];
 b = [b1 b2 b3; ones(1,3)]
 
-C = a'*F*b
+
+% Possible Correspondances
+
+% a to epipolar line b
+cB = a'*F*b
+
+% b to epipolar line a
+cA = b'*F*a
 

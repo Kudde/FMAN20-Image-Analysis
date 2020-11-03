@@ -16,9 +16,9 @@ load FaceNonFace
 nbr_examples = length(Y);
 
 k = 3;
-test_errors = zeros(k,1);
-train_errors = zeros(k,1);
-ki = k;
+% test_errors = zeros(k,1);
+% train_errors = zeros(k,1);
+% ki = k;
 %for ki = 1 : k
     
 % This outer loop will run 100 times, so that you get a mean error for your
