@@ -25,3 +25,7 @@
 - OCR system construction and system testing -> task4
 
 ## Assignment 4
+- Segmentation by any means -> task1
+- Segmentation with Graph Cuts -> task2
+- Computer Vision -> task3
+- OCR system construction and system testing -> task4
